@@ -20,7 +20,5 @@ class CommonIcon {
     );
   }
 
-  //EXAMPLE FOR GETTING SVG IMAGE
-  ///Bottom menu icon
-  static SvgPicture logo = getImageFromAsset("logo.svg");
+  static SvgPicture google = getImageFromAsset("google.svg");
 }

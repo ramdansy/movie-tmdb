@@ -15,4 +15,8 @@ class AppConstant {
 
   //icons
   static const double iconNormal = 24.0;
+
+  //text
+  static const textErrorEmpty = '@fieldName required';
+  static const textInvalidEmailFormat = 'The email address you entered is not valid. Please use the correct format (e.g., name@example.com)';
 }

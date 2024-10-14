@@ -17,6 +17,7 @@ class CommonButtonFilled extends StatelessWidget {
     this.fontColor = CommonColor.fontWhite,
     this.iconLeft,
     this.isLoading = false,
+    this.textAlign,
   });
 
   final VoidCallback onPressed;
@@ -30,37 +31,55 @@ class CommonButtonFilled extends StatelessWidget {
   final Color fontColor;
   final Widget? iconLeft;
   final bool isLoading;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: isEnable ? onPressed : null,
       borderRadius: BorderRadius.circular(99.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: isEnable ? color : CommonColor.disabled,
-          borderRadius: BorderRadius.circular(99.0),
-          gradient: const LinearGradient(
-            colors: [
-              CommonColor.accent,
-              Color(0xFF2F3F94),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [
-              0.5,
-              0.85
-            ],
-          ),
-        ),
-        padding: EdgeInsets.symmetric(vertical: paddingVertical, horizontal: paddingHorizontal),
-        child: Center(
-          child: Text(
-            text,
-            style: TextStyle(color: fontColor, fontWeight: fontWeight, fontSize: fontSize),
-          ),
-        ),
-      ),
+      child: isLoading
+          ? const SizedBox(
+              width: AppConstant.iconNormal,
+              height: AppConstant.iconNormal,
+              child: CircularProgressIndicator(color: CommonColor.white),
+            )
+          : Container(
+              decoration: BoxDecoration(
+                color: isEnable ? color : CommonColor.disabled,
+                borderRadius: BorderRadius.circular(99.0),
+                gradient: color == CommonColor.accent
+                    ? const LinearGradient(
+                        colors: [
+                          CommonColor.accent,
+                          Color(0xFF2F3F94),
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: [
+                          0.5,
+                          0.85
+                        ],
+                      )
+                    : null,
+              ),
+              padding: EdgeInsets.symmetric(vertical: paddingVertical, horizontal: paddingHorizontal),
+              child: Row(
+                children: [
+                  if (iconLeft != null) ...[
+                    Container(child: iconLeft),
+                    const SizedBox(width: AppConstant.padding8),
+                  ],
+                  Expanded(
+                    child: Text(
+                      text,
+                      style: TextStyle(color: fontColor, fontWeight: fontWeight, fontSize: fontSize),
+                      textAlign: textAlign ?? TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+            ),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
-import 'package:movie_tmdb/presentation/pages/login_view.dart';
-import 'package:movie_tmdb/presentation/pages/register_view.dart';
-import 'package:movie_tmdb/presentation/pages/welcome_view.dart';
+import 'package:movie_tmdb/presentation/pages/auth/login_view.dart';
+import 'package:movie_tmdb/presentation/pages/auth/register_view.dart';
+import 'package:movie_tmdb/presentation/pages/auth/welcome_view.dart';
 
 abstract class RoutesName {
   static const welcome = 'welcome';
@@ -15,16 +15,18 @@ final GoRouter router = GoRouter(
       path: '/',
       name: RoutesName.welcome,
       builder: (context, state) => const WelcomeView(),
-    ),
-    GoRoute(
-      path: '/login',
-      name: RoutesName.login,
-      builder: (context, state) => const LoginView(),
-    ),
-    GoRoute(
-      path: '/register',
-      name: RoutesName.register,
-      builder: (context, state) => const RegisterView(),
+      routes: [
+        GoRoute(
+          path: 'login',
+          name: RoutesName.login,
+          builder: (context, state) => const LoginView(),
+        ),
+        GoRoute(
+          path: 'register',
+          name: RoutesName.register,
+          builder: (context, state) => const RegisterView(),
+        ),
+      ],
     ),
   ],
 );
